@@ -57,12 +57,12 @@
     }
 
     function createCar(){
-        let path = '/car-create';
+        let path = '/car-edit';
         location.href=path;
     }
 
     function deleteCar(){
-        let path = '/car-delete?id=';
+        let path = '/car-delete/';
         let a = document.getElementsByClassName("selected").item(0)
         if(!a) return;
         path += a.id;

@@ -6,11 +6,12 @@ import lab2.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import sun.plugin.util.UIUtil;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -24,6 +25,7 @@ public class CarController {
 
     @GetMapping("/cars")
     public String getCarBrowsePage(Model model) {
+        List<Car> cars = carService.findAll();
         model.addAttribute("cars", carService.findAll());
         return "cars";
     }
@@ -31,7 +33,9 @@ public class CarController {
     @GetMapping("car-edit")
     public String getCarEditPage(@RequestParam(name="id", required=false, defaultValue = "") String id, Model model){
         if(id.isEmpty()){
-            model.addAttribute("car", new Car());
+            Car car = new Car();
+            car.setId(UUID.randomUUID());
+            model.addAttribute("car", car);
             return "carEdit";
         }
         UUID uuid = UUID.fromString(id);
@@ -39,13 +43,19 @@ public class CarController {
         return "carEdit";
     }
 
-    @GetMapping("car-delete")
+    @GetMapping("car-delete/{id}")
     @ResponseBody
-    public String  deleteCar(@RequestParam(name="id") String id){
+    public String  deleteCar(@PathVariable("id") String id){
         UUID uuid = UUID.fromString(id);
         Car car = carService.findCarById(uuid);
         carService.deleteCar(car);
         return "ok";
+    }
+
+    @PostMapping("save-car/{id}")
+    public String saveCar(@PathVariable("id") String id, final Car car, final BindingResult bindingResult, final ModelMap modelMap){
+        carService.saveCar(car);
+        return "redirect:/cars";
     }
 
 }

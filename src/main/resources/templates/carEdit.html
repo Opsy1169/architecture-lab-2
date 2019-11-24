@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
 <head> 
     <title>Getting Started: Serving Web Content</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,59 +7,29 @@
 
 <body>
 <p th:text="${car.getModel()}"></p>
-    <button onclick="createCar()">Create</button>
-    <button onclick="editCar()">Edit</button>
-    <button onclick="deleteCar()">Delete</button>
+    <form action="#" th:action="@{/save-car/{id}(id=${car.getId()})}" th:object="${car}" method="post">
+        <table>
+            <tr>
+                <td>Model:</td>
+                <td><input type="text" th:field="*{model}"/></td>
+            </tr>
+            <tr>
+                <td>Manufacturer:</td>
+                <td><input type="text" th:field="*{manufacturer}"></td>
+            </tr>
+        </table>
+        <button type="submit">Submit</button>
+
+    </form>
 </body>
 <style>
     .selected{
         background-color: blue;
     }
 </style>
+
 <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
-<script>
-    let customElements = document.querySelectorAll('tbody tr');
-    for(let elem of customElements){
-        elem.onclick = function () {
-            setSelected(elem)
-        }
-    }
-    function setSelected(elem){
-        let prevSelected = document.getElementsByClassName("selected");
-        if(prevSelected.length > 0) {
-            prevSelected.item(0).classList.remove("selected");
-        }
-        elem.classList.add("selected");
-    }
-
-    function editCar() {
-        let path = '/car-edit?id=';
-        let a = document.getElementsByClassName("selected").item(0)
-        if(!a) return;
-        path += a.id;
-        location.href=path;
-    }
-
-    function createCar(){
-        let path = '/car-create';
-        location.href=path;
-    }
-
-    function deleteCar(){
-        let a = document.getElementsByClassName("selected").item(0)
-        if(!a) return;
-        $.ajax({
-            url: '/car-delete',
-            type: 'POST',
-            data: a.id,
-            success: function (result) {
-                $(a).hide();
-            }
-
-        })
-    }
-</script>
 </html>

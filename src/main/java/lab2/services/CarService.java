@@ -28,6 +28,9 @@ public class CarService {
     }
 
     public Car saveCar(Car car){
+        if(car.getId() == null){
+            car.setId(UUID.randomUUID());
+        }
         return carRepository.save(car);
     }
 
