@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <table >
+        <thead>
+        <tr>
+            <th>Model</th>
+            <th>Manufacturer</th>
+        </tr>
+        </thead>
+        <tbody th:each="showroom: ${showrooms}">
+        <tr th:id="${showroom.getId().toString()}">
+            <th th:text="${showroom.getName()}"></th>
+            <th th:text="${showroom.getAddress()}"></th>
+        </tr>
+        </tbody>
+    </table>
+    <button onclick="createItem()">Create</button>
+    <button onclick="editItem()">Edit</button>
+    <button onclick="deleteItem()">Delete</button>
+</body>
+<style>
+    .selected{
+        background-color: blue;
+    }
+</style>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script>
+    let customElements = document.querySelectorAll('tbody tr');
+    for(let elem of customElements){
+        elem.onclick = function () {
+            setSelected(elem)
+        }
+    }
+    function setSelected(elem){
+        let prevSelected = document.getElementsByClassName("selected");
+        if(prevSelected.length > 0) {
+            prevSelected.item(0).classList.remove("selected");
+        }
+        elem.classList.add("selected");
+    }
+
+    function editItem() {
+        let path = '/showroom-edit?id=';
+        let a = document.getElementsByClassName("selected").item(0)
+        if(!a) return;
+        path += a.id;
+        location.href=path;
+    }
+
+    function createItem(){
+        let path = '/showroom-edit';
+        location.href=path;
+    }
+
+    function deleteItem(){
+        let path = '/showroom-delete/';
+        let a = document.getElementsByClassName("selected").item(0)
+        if(!a) return;
+        path += a.id;
+        $.ajax({
+            url: path,
+            type: 'GET',
+            success: function (result) {
+                $(a).hide();
+            }
+
+        })
+    }
+</script>
+</html>

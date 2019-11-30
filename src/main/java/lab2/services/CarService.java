@@ -1,10 +1,9 @@
 package lab2.services;
 
 import lab2.entities.Car;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import lab2.repositories.CarRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,22 +18,22 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
-    public List<Car> findAll(){
+    public List<Car> findAll() {
         return carRepository.findAll();
     }
 
-    public Car findCarById(UUID id){
+    public Car findCarById(UUID id) {
         return carRepository.findById(id).get();
     }
 
-    public Car saveCar(Car car){
-        if(car.getId() == null){
+    public Car saveCar(Car car) {
+        if (car.getId() == null) {
             car.setId(UUID.randomUUID());
         }
         return carRepository.save(car);
     }
 
-    public void deleteCar(Car car){
+    public void deleteCar(Car car) {
         carRepository.delete(car);
     }
 }

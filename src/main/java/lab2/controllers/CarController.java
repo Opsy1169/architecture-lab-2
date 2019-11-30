@@ -1,4 +1,4 @@
-package lab2;
+package lab2.controllers;
 
 import lab2.entities.Car;
 import lab2.repositories.CarRepository;
@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import sun.plugin.util.UIUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -31,8 +30,8 @@ public class CarController {
     }
 
     @GetMapping("car-edit")
-    public String getCarEditPage(@RequestParam(name="id", required=false, defaultValue = "") String id, Model model){
-        if(id.isEmpty()){
+    public String getCarEditPage(@RequestParam(name = "id", required = false, defaultValue = "") String id, Model model) {
+        if (id.isEmpty()) {
             Car car = new Car();
             car.setId(UUID.randomUUID());
             model.addAttribute("car", car);
@@ -45,7 +44,7 @@ public class CarController {
 
     @GetMapping("car-delete/{id}")
     @ResponseBody
-    public String  deleteCar(@PathVariable("id") String id){
+    public String deleteCar(@PathVariable("id") String id) {
         UUID uuid = UUID.fromString(id);
         Car car = carService.findCarById(uuid);
         carService.deleteCar(car);
@@ -53,7 +52,7 @@ public class CarController {
     }
 
     @PostMapping("save-car/{id}")
-    public String saveCar(@PathVariable("id") String id, final Car car, final BindingResult bindingResult, final ModelMap modelMap){
+    public String saveCar(@PathVariable("id") String id, final Car car, final BindingResult bindingResult, final ModelMap modelMap) {
         carService.saveCar(car);
         return "redirect:/cars";
     }
