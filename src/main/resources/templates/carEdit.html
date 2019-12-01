@@ -7,18 +7,35 @@
 
 <body>
 <p th:text="${car.getModel()}"></p>
-    <form action="#" th:action="@{/save-car/{id}(id=${car.getId()})}" th:object="${car}" method="post">
+    <form action="#" th:action="@{/save-car/{id}(id=${car.getId()})}" th:object="${car}" method="post" id="edit_form">
         <table>
             <tr>
                 <td>Model:</td>
-                <td><input type="text" th:field="*{model}"/></td>
+                <td><input type="text" th:required="true" th:field="*{model}"/></td>
             </tr>
             <tr>
                 <td>Manufacturer:</td>
-                <td><input type="text" th:field="*{manufacturer}"></td>
+                <td><input type="text" th:required="true" th:field="*{manufacturer}"></td>
+            </tr>
+            <tr>
+                <td>Door count:</td>
+                <td><input type="number" max="7" min="3" th:value="3" th:field="*{doorCount} "></td>
+            </tr>
+            <tr>
+                <td>Model code:</td>
+                <td><input type="text" th:field="*{modelCode}"></td>
+            </tr>
+            <tr>
+                <td>Is electrocar:</td>
+                <td><input type="checkbox" th:field="*{electrocar}"></td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td><textarea th:field="*{decription}" form="edit_form" rows="10" cols="15"></textarea></td>
             </tr>
         </table>
         <button type="submit">Submit</button>
+        <button th:action="@{/cars}">Cancel</button>
 
     </form>
 </body>

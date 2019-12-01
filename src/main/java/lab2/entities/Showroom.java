@@ -12,6 +12,7 @@ public class Showroom {
     private UUID id;
     private String name;
     private String address;
+    private Integer capacityInCars;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -56,5 +57,15 @@ public class Showroom {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, address);
+    }
+
+    @Basic
+    @Column(name = "capacity_in_cars", nullable = true)
+    public Integer getCapacityInCars() {
+        return capacityInCars;
+    }
+
+    public void setCapacityInCars(Integer capacityInCars) {
+        this.capacityInCars = capacityInCars;
     }
 }

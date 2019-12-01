@@ -6,17 +6,20 @@
 </head>
 
 <body>
+<button th:onclick="window.location.href='/'">To main screen</button>
     <table >
         <thead>
         <tr>
             <th>Model</th>
             <th>Manufacturer</th>
+            <th>Capacity</th>
         </tr>
         </thead>
         <tbody th:each="showroom: ${showrooms}">
         <tr th:id="${showroom.getId().toString()}">
             <th th:text="${showroom.getName()}"></th>
             <th th:text="${showroom.getAddress()}"></th>
+            <th th:text="${showroom.getCapacityInCars()}"></th>
         </tr>
         </tbody>
     </table>

@@ -17,8 +17,13 @@
                 <td>Address:</td>
                 <td><input type="text" th:field="*{address}"></td>
             </tr>
+            <tr>
+                <td>Capacity in cars:</td>
+                <td><input type="number" th:field="*{capacityInCars}" width="150px"></td>
+            </tr>
         </table>
         <button type="submit">Submit</button>
+        <button th:action="@{/showrooms}">Cancel</button>
 
     </form>
 </body>

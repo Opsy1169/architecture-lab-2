@@ -6,17 +6,24 @@
 </head>
 
 <body>
+<button th:onclick="window.location.href='/'">To main screen</button>
     <table >
         <thead>
         <tr>
             <th>Model</th>
             <th>Manufacturer</th>
+            <th>Door count</th>
+            <th>Model code</th>
+            <th>Is electrocar</th>
         </tr>
         </thead>
         <tbody th:each="car: ${cars}">
         <tr th:id="${car.getId().toString()}">
             <th th:text="${car.getModel()}"></th>
             <th th:text="${car.getManufacturer()}"></th>
+            <th th:text="${car.getDoorCount()}"></th>
+            <th th:text="${car.getModelCode()}"></th>
+            <th><input type="checkbox" th:checked="${car.getElectrocar()}" disabled="true"></th>
         </tr>
         </tbody>
     </table>
