@@ -1,5 +1,12 @@
 <!DOCTYPE HTML>
+
+
 <html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="../static/css/common.css" th:href="@{../static/css/common.css}" >
 <head> 
     <title>Getting Started: Serving Web Content</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,35 +14,35 @@
 
 <body>
 <p th:text="${car.getModel()}"></p>
-    <form action="#" th:action="@{/save-car/{id}(id=${car.getId()})}" th:object="${car}" method="post" id="edit_form">
-        <table>
+    <form class="form" action="#" th:action="@{/save-car/{id}(id=${car.getId()})}" th:object="${car}" method="post" id="edit_form">
+        <table class="table">
             <tr>
                 <td>Model:</td>
-                <td><input type="text" th:required="true" th:field="*{model}"/></td>
+                <td><input type="text" class="form-control" th:required="true" th:field="*{model}"/></td>
             </tr>
             <tr>
                 <td>Manufacturer:</td>
-                <td><input type="text" th:required="true" th:field="*{manufacturer}"></td>
+                <td><input type="text" class="form-control" th:required="true" th:field="*{manufacturer}"></td>
             </tr>
             <tr>
                 <td>Door count:</td>
-                <td><input type="number" max="7" min="3" th:value="3" th:field="*{doorCount} "></td>
+                <td><input class="form-control" type="number" max="7" min="3" th:value="3" th:field="*{doorCount} "></td>
             </tr>
             <tr>
                 <td>Model code:</td>
-                <td><input type="text" th:field="*{modelCode}"></td>
+                <td><input class="form-control" type="text" th:field="*{modelCode}"></td>
             </tr>
             <tr>
                 <td>Is electrocar:</td>
-                <td><input type="checkbox" th:field="*{electrocar}"></td>
+                <td><input class="form-check-input" type="checkbox" th:field="*{electrocar}"></td>
             </tr>
             <tr>
                 <td>Description:</td>
-                <td><textarea th:field="*{decription}" form="edit_form" rows="10" cols="15"></textarea></td>
+                <td><textarea class="form-control"  th:field="*{decription}" form="edit_form" rows="10" cols="15"></textarea></td>
             </tr>
         </table>
-        <button type="submit">Submit</button>
-        <button th:action="@{/cars}">Cancel</button>
+        <button class="btn btn-lg btn-default" type="submit">Submit</button>
+        <button class="btn btn-lg btn-default" th:action="@{/cars}">Cancel</button>
 
     </form>
 </body>
