@@ -14,15 +14,15 @@
 
 <body>
 <p th:text="${showroom.getName()}"></p>
-    <form class="form" action="#" th:action="@{/save-showroom/{id}(id=${showroom.getId()})}" th:object="${showroom}" method="post">
+    <form class="form edit-form" action="#" th:action="@{/save-showroom/{id}(id=${showroom.getId()})}" th:object="${showroom}" method="post">
         <table class="table">
             <tr>
                 <td>Name:</td>
-                <td><input class="form-control" type="text" th:field="*{name}"/></td>
+                <td><input class="form-control" type="text" th:required="true" th:field="*{name}"/></td>
             </tr>
             <tr>
                 <td>Address:</td>
-                <td><input class="form-control" type="text" th:field="*{address}"></td>
+                <td><input class="form-control" type="text" th:required="true" th:field="*{address}"></td>
             </tr>
             <tr>
                 <td>Capacity in cars:</td>
@@ -30,9 +30,9 @@
             </tr>
         </table>
         <button class="btn btn-lg btn-default" type="submit">Submit</button>
-        <button class="btn btn-lg btn-default" th:action="@{/showrooms}">Cancel</button>
 
-    </form>
+
+    </form>        <button class="btn btn-lg btn-default" th:onclick="window.location.href='/showrooms'">Cancel</button>
 </body>
 <style>
     .selected{

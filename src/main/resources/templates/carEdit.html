@@ -14,7 +14,7 @@
 
 <body>
 <p th:text="${car.getModel()}"></p>
-    <form class="form" action="#" th:action="@{/save-car/{id}(id=${car.getId()})}" th:object="${car}" method="post" id="edit_form">
+    <form class="form edit-form" action="#" th:action="@{/save-car/{id}(id=${car.getId()})}" th:object="${car}" method="post" id="edit_form">
         <table class="table">
             <tr>
                 <td>Model:</td>
@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <td>Door count:</td>
-                <td><input class="form-control" type="number" max="7" min="3" th:value="3" th:field="*{doorCount} "></td>
+                <td><input class="form-control" type="number" max="7" min="3" value=3 th:field="*{doorCount} "></td>
             </tr>
             <tr>
                 <td>Model code:</td>
@@ -42,9 +42,10 @@
             </tr>
         </table>
         <button class="btn btn-lg btn-default" type="submit">Submit</button>
-        <button class="btn btn-lg btn-default" th:action="@{/cars}">Cancel</button>
+
 
     </form>
+    <button class="btn btn-lg btn-default" th:onclick="window.location.href='/cars'">Cancel</button>
 </body>
 <style>
     .selected{
